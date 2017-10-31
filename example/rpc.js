@@ -1,3 +1,4 @@
+require('dotenv').load()
 module.exports = require('yajrpc/qup')({
   url: process.env.RPC,
   user: process.env.RPCUSER,

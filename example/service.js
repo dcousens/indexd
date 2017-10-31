@@ -1,8 +1,10 @@
-let indexd = require('indexd')
+//let indexd = require('indexd')
+let indexd = require('../index')
 let leveldown = require('leveldown')
 let qup = require('qup')
 let rpc = require('./rpc')
 let zmq = require('zmq')
+require('dotenv').load()
 
 let db = leveldown(process.env.INDEXDB)
 let adapter = indexd.makeAdapter(db, rpc)
@@ -53,7 +55,7 @@ module.exports = function initialize (callback) {
       // don't add to the mempool until after a reset is complete
       if (syncQueue.running > 0) return
       if (topic !== 'hashtx') return
-      console.logTx(topic, message)
+      console.log(topic, message)
 
       adapter.mempool.add(message, errorSink)
     })
